@@ -1,0 +1,130 @@
+##
+## Makefile for  in /home/karmes_l/Projets/Maths
+## 
+## Made by lionel karmes
+## Login   <karmes_l@epitech.net>
+## 
+## Started on  Mon Nov  3 16:51:51 2014 lionel karmes
+## Last update Sat Jun 20 19:13:10 2015 Steven Loo Fat
+##
+
+CC	= gcc
+
+RM	= rm -f
+
+CFLAGS	+= -Wextra -Wall -Werror
+CFLAGS	+= -ansi -pedantic
+CFLAGS	+= -I./include/
+
+LDFLAGS	= -L./lib/ -lmy
+
+NAME	= asm
+
+NAMEDIR	= srcs/
+
+LIBDIR	= lib/
+
+LIBNAME	= $(addprefix $(LIBDIR), libmy.a)
+
+SRCS	= main.c \
+	asm.c \
+	msg_error.c \
+	init_header.c \
+	msg_error_header.c \
+	msg_warning.c \
+	msg_error_label.c \
+	msg_error_args.c \
+	fct_list.c \
+	fct_element.c \
+	put_element.c \
+	remove_element.c \
+	init_label.c \
+	parsing_args.c \
+	init_op_code.c \
+	check_instruction.c \
+	valid_args.c \
+	argc_define_octal.c \
+	write_file_cor.c \
+	write_file_cor_body.c \
+	split_argument.c \
+	init_list.c \
+	define_octal_value.c \
+	op.c
+
+SRCS2	= count_num.c \
+	  convert_base.c \
+		  my_charisalpha.c \
+	  my_charisnum.c \
+	  my_getnbr.c \
+	  my_fputchar.c \
+	  my_putchar.c \
+	  my_putcharerror.c \
+	  my_putnbr.c \
+	  my_putstr.c \
+	  my_putstrerror.c \
+	  my_revstr.c \
+	  my_show_wordtab.c \
+	  my_strcapitalize.c \
+	  my_strcat.c \
+	  my_strcmp.c \
+	  my_strcpy.c \
+	  my_strcpy3.c \
+	  my_strdup.c \
+	  my_strdup2.c \
+	  my_str_isalpha.c \
+	  my_str_islower.c \
+	  my_str_isnum.c \
+	  my_str_isnum2.c \
+	  my_str_isprintable.c \
+	  my_str_isupper.c \
+	  my_str_to_wordtab.c \
+	  my_strlen.c \
+	  my_strlowcase.c \
+	  my_strncat.c \
+	  my_strncmp.c \
+	  my_strncpy.c \
+	  my_strncpy2.c \
+	  my_strnum_to_wordtab.c \
+	  my_strstr.c \
+	  my_charstr.c \
+	  my_strstr2.c \
+	  my_strupcase.c \
+	  my_swap.c \
+	  pmalloc.c \
+	  pow_10.c \
+	  power.c \
+	  replace_by_argument.c \
+          remove_comment.c \
+	  epur_str.c \
+	  my_strtablen.c \
+	  delete_n_caractere.c \
+          get_next_line.c
+
+SRCSLIB	= $(addprefix $(LIBDIR), $(SRCS2))
+
+SRCSNAME = $(addprefix $(NAMEDIR), $(SRCS))
+
+OBJS	= $(SRCSNAME:.c=.o)
+
+OBJSLIB	= $(SRCSLIB:.c=.o)
+
+
+all: $(LIBNAME) $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
+
+$(LIBNAME): $(OBJSLIB)
+	make -C $(LIBDIR)
+clean:
+	$(RM) $(OBJS)
+	make clean -C $(LIBDIR)
+
+fclean: clean
+	$(RM) $(NAME)
+	make fclean -C $(LIBDIR)
+
+re: fclean all
+
+
+.PHONY: all clean fclean re
